@@ -18,9 +18,9 @@ final class _$BannerService extends BannerService {
   final Type definitionType = BannerService;
 
   @override
-  Future<Response<List<dynamic>>> fetchBanners({
-    int? page = 3,
-    int? limit = 5,
+  Future<Response<List<Banner>>> fetchBanners({
+    int page = 3,
+    int limit = 5,
   }) {
     final Uri $url = Uri.parse('https://picsum.photos/v2/list');
     final Map<String, dynamic> $params = <String, dynamic>{
@@ -33,6 +33,9 @@ final class _$BannerService extends BannerService {
       client.baseUrl,
       parameters: $params,
     );
-    return client.send<List<dynamic>, List<dynamic>>($request);
+    return client.send<List<Banner>, Banner>(
+      $request,
+      responseConverter: BannerService._bannerListResponseConverter,
+    );
   }
 }

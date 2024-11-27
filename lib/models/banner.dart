@@ -23,16 +23,6 @@ class Banner {
 
   Map<String, dynamic> toJson() => _$BannerToJson(this);
 
-  // factory Banner.fromJson(Map<String, dynamic> json) {
-  //   return Banner(
-  //     id: json['id'] ?? "",
-  //     imageUrl: json['download_url'] ?? "",
-  //     width: json['width'] ?? 0,
-  //     height: json['height'] ?? 0,
-  //     author: json['author'] ?? "",
-  //   );
-  // }
-
   Banner copyWith({
     String? id,
     String? imageUrl,

@@ -24,24 +24,19 @@ class BannerViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      var res = await _apiService.fetchBanners(page: page, limit: limit);
-      if (res.isSuccessful) {
-        _banners = _parseBanners(res.body) ?? _banners;
+      var res =
+          await _apiService.fetchBanners(page: page ?? 3, limit: limit ?? 5);
+      if (res.isSuccessful && res.body != null) {
+        _banners = res.body!;
+      } else {
+        throw res.error.toString();
       }
     } catch (e) {
-      if (kDebugMode) {
-        print('Error fetching banners: $e');
-      }
+      debugPrint('Error fetching banners: $e');
     } finally {
       _isLoading = false;
       notifyListeners();
     }
-  }
-
-  List<Banner>? _parseBanners(List<dynamic>? body) {
-    return body
-        ?.map((json) => Banner.fromJson(json as Map<String, dynamic>))
-        .toList();
   }
 
   @override
