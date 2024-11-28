@@ -3,6 +3,7 @@ import 'package:f_common_package_1/views/user/user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:vector_graphics/vector_graphics.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -20,14 +21,14 @@ class LoginScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                'assets/logo.svg',
-                colorFilter:
-                    const ColorFilter.mode(Colors.red, BlendMode.srcIn),
+              const SvgPicture(
+                AssetBytesLoader('assets/logo.svg.vec'),
+                width: 100,
+                colorFilter: ColorFilter.mode(Colors.red, BlendMode.srcIn),
                 semanticsLabel: 'Red dash paths',
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
               SvgPicture.network(
                 'https://www.svgrepo.com/show/450884/find-path.svg',
@@ -36,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                     const Icon(Icons.image),
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
               Consumer<AuthViewModel>(
                 builder: (ctx, auth, __) => ElevatedButton(

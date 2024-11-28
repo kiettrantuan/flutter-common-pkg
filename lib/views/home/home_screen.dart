@@ -9,6 +9,7 @@ import 'package:f_common_package_1/views/user/user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:vector_graphics/vector_graphics.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -61,12 +62,12 @@ class HomeScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  child: SvgPicture.asset(
-                    'assets/knight.svg',
+                  child: const SvgPicture(
+                    AssetBytesLoader('assets/knight.svg.vec'),
                     width: 30,
                     semanticsLabel: 'hollow-knight',
-                    colorFilter: const ColorFilter.mode(
-                        Colors.blueGrey, BlendMode.srcIn),
+                    colorFilter:
+                        ColorFilter.mode(Colors.blueGrey, BlendMode.srcIn),
                   ),
                 );
               }
