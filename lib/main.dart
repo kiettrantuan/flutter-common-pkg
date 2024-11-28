@@ -1,3 +1,4 @@
+import 'package:f_common_package_1/firebase_options.dart';
 import 'package:f_common_package_1/services/auth_service.dart';
 import 'package:f_common_package_1/services/banner_service.dart';
 import 'package:f_common_package_1/services/chopper_client.dart';
@@ -5,6 +6,7 @@ import 'package:f_common_package_1/services/shared_preferences.dart';
 import 'package:f_common_package_1/viewmodels/auth_viewmodel.dart';
 import 'package:f_common_package_1/viewmodels/banner_viewmodel.dart';
 import 'package:f_common_package_1/views/home/home_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +14,10 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ChopperClientInstance.initializeChopperClient();
   await SharedPreferencesService.init();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 

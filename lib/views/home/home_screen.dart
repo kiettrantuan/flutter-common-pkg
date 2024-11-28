@@ -6,6 +6,7 @@ import 'package:f_common_package_1/views/bare/bare_screen.dart';
 import 'package:f_common_package_1/views/home/widgets/home_banner.dart';
 import 'package:f_common_package_1/views/login/login_screen.dart';
 import 'package:f_common_package_1/views/user/user_screen.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -113,19 +114,22 @@ class HomeScreen extends StatelessWidget {
             height: 10,
           ),
           Consumer<BannerViewModel>(
-            builder: (ctx, banner, __) => IgnorePointer(
-              ignoring: banner.isLoading,
-              child: FloatingActionButton(
-                tooltip: 'Reload',
-                backgroundColor: banner.isLoading ? Colors.black54 : null,
-                foregroundColor: banner.isLoading ? Colors.grey : null,
-                onPressed: () {
-                  banner.fetchBanners(
-                      page: 1 + Random().nextInt(10),
-                      limit: 3 + Random().nextInt(10));
-                },
-                child: const Icon(Icons.refresh),
-              ),
+            builder: (ctx, banner, __) => FloatingActionButton(
+              tooltip: 'Reload',
+              backgroundColor: banner.isLoading ? Colors.black54 : null,
+              foregroundColor: banner.isLoading ? Colors.grey : null,
+              onPressed: banner.isLoading
+                  ? null
+                  : () async {
+                      await FirebaseAnalytics.instance
+                          .logSearch(searchTerm: 'Beethoven')
+                          .then((_) => debugPrint('success'))
+                          .catchError((e) => debugPrint(e));
+                      banner.fetchBanners(
+                          page: 1 + Random().nextInt(10),
+                          limit: 3 + Random().nextInt(10));
+                    },
+              child: const Icon(Icons.refresh),
             ),
           ),
         ],

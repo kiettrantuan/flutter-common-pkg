@@ -1,5 +1,6 @@
 import 'package:f_common_package_1/viewmodels/auth_viewmodel.dart';
 import 'package:f_common_package_1/views/user/user_screen.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -47,6 +48,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   onPressed: () async {
                     await ctx.read<AuthViewModel>().login();
+                    await FirebaseAnalytics.instance.logLogin();
                     if (ctx.mounted) {
                       Navigator.of(ctx).pushReplacement(
                         MaterialPageRoute(
