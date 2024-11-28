@@ -1,9 +1,10 @@
+import 'package:f_common_package_1/models/model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'banner.g.dart';
 
 @JsonSerializable()
-class Banner {
+class Banner extends Model {
   final String id;
   @JsonKey(name: 'download_url')
   final String imageUrl;
@@ -21,6 +22,7 @@ class Banner {
 
   factory Banner.fromJson(Map<String, dynamic> json) => _$BannerFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$BannerToJson(this);
 
   Banner copyWith({

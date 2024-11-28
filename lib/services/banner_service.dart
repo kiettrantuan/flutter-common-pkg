@@ -30,14 +30,3 @@ abstract class BannerService extends ChopperService {
     return response.copyWith();
   }
 }
-
-// class BannerConverter
-//     extends JsonConverter<List<Banner>, List<Map<String, dynamic>>> {
-//   @override
-//   List<Banner> fromJson(List<Map<String, dynamic>> json) =>
-//       json.map((bannerMap) => Banner.fromJson(bannerMap)).toList();
-//
-//   @override
-//   List<Map<String, dynamic>> toJson(List<Banner> object) =>
-//       object.map((banner) => banner.toJson()).toList();
-// }

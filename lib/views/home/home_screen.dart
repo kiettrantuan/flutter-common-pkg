@@ -1,8 +1,11 @@
 import 'dart:math';
 
+import 'package:f_common_package_1/viewmodels/auth_viewmodel.dart';
 import 'package:f_common_package_1/viewmodels/banner_viewmodel.dart';
 import 'package:f_common_package_1/views/bare/bare_screen.dart';
 import 'package:f_common_package_1/views/home/widgets/home_banner.dart';
+import 'package:f_common_package_1/views/login/login_screen.dart';
+import 'package:f_common_package_1/views/user/user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -45,6 +48,49 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          Consumer<AuthViewModel>(
+            builder: (_, auth, __) {
+              print(auth.user);
+              if (auth.user != null) {
+                return FloatingActionButton(
+                  heroTag: 'user',
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const UserScreen(),
+                      ),
+                    );
+                  },
+                  child: const Icon(Icons.person),
+                );
+              }
+              return FloatingActionButton(
+                heroTag: 'login',
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    ),
+                  );
+                },
+                child: const Icon(Icons.login),
+              );
+            },
+            child: FloatingActionButton(
+              heroTag: 'login',
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const LoginScreen(),
+                  ),
+                );
+              },
+              child: const Icon(Icons.login),
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
           FloatingActionButton(
             heroTag: 'in_memory',
             onPressed: () {
