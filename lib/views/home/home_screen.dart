@@ -7,6 +7,7 @@ import 'package:f_common_package_1/views/home/widgets/home_banner.dart';
 import 'package:f_common_package_1/views/login/login_screen.dart';
 import 'package:f_common_package_1/views/user/user_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -50,7 +51,6 @@ class HomeScreen extends StatelessWidget {
         children: [
           Consumer<AuthViewModel>(
             builder: (_, auth, __) {
-              print(auth.user);
               if (auth.user != null) {
                 return FloatingActionButton(
                   heroTag: 'user',
@@ -61,7 +61,13 @@ class HomeScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Icon(Icons.person),
+                  child: SvgPicture.asset(
+                    'assets/knight.svg',
+                    width: 30,
+                    semanticsLabel: 'hollow-knight',
+                    colorFilter: const ColorFilter.mode(
+                        Colors.blueGrey, BlendMode.srcIn),
+                  ),
                 );
               }
               return FloatingActionButton(

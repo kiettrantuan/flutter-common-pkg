@@ -1,6 +1,12 @@
 # f_common_package_1
 
-A new Flutter project.
+Flutter common packages:
+
+- flutter_svg
+- cached_network_image
+- chopper
+- json_serializable
+- shared_preferences
 
 ## Getting Started
 
