@@ -48,7 +48,9 @@ class LoginScreen extends StatelessWidget {
                   ),
                   onPressed: () async {
                     await ctx.read<AuthViewModel>().login();
-                    await FirebaseAnalytics.instance.logLogin();
+                    await FirebaseAnalytics.instance.logLogin(
+                        loginMethod: 'test-login',
+                        parameters: {"user": "test"});
                     if (ctx.mounted) {
                       Navigator.of(ctx).pushReplacement(
                         MaterialPageRoute(

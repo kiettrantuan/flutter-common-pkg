@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:f_common_package_1/viewmodels/auth_viewmodel.dart';
+import 'package:f_common_package_1/views/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -44,8 +45,11 @@ class UserScreen extends StatelessWidget {
                       : () async {
                           await ctx.read<AuthViewModel>().logout();
                           if (ctx.mounted) {
-                            Navigator.of(ctx)
-                                .popUntil(ModalRoute.withName('/'));
+                            Navigator.of(ctx).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => const HomeScreen(),
+                              ),
+                            );
                           }
                         },
                   child: const Text('Logout'),

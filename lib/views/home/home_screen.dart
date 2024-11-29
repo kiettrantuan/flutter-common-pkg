@@ -121,13 +121,13 @@ class HomeScreen extends StatelessWidget {
               onPressed: banner.isLoading
                   ? null
                   : () async {
-                      await FirebaseAnalytics.instance
-                          .logSearch(searchTerm: 'Beethoven')
-                          .then((_) => debugPrint('success'))
-                          .catchError((e) => debugPrint(e));
-                      banner.fetchBanners(
-                          page: 1 + Random().nextInt(10),
-                          limit: 3 + Random().nextInt(10));
+                      final page = 1 + Random().nextInt(10),
+                          limit = 3 + Random().nextInt(10);
+                      await banner.fetchBanners(page: page, limit: limit);
+                      await FirebaseAnalytics.instance.logEvent(
+                        name: "fetch_banners",
+                        parameters: {"page": page, "limit": limit},
+                      );
                     },
               child: const Icon(Icons.refresh),
             ),
