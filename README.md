@@ -11,12 +11,19 @@ Flutter common packages:
 - firebase_analytics
 - firebase_messaging
 
-Remember adding Firebase secret to .gitignore:
+Remember adding Firebase secret to `.gitignore`:
 
 ```
 **/firebase_options.dart
 **/google-services.json
 **/GoogleService-Info.plist
+```
+
+Steps to remove commited files after adding to `.gitignore`:
+
+```shell
+git rm -rf --cached .
+git add .
 ```
 
 ## Getting Started
