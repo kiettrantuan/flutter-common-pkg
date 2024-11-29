@@ -13,17 +13,38 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  debugPrint("Handling a background message: ${message.messageId}");
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ChopperClientInstance.initializeChopperClient();
   await SharedPreferencesService.init();
+
+  /// Must initializeApp before any Firebase services.
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
+  // TODO: Apple requires dev-account
   if (Platform.isAndroid) {
-    await FirebaseMessaging.instance.requestPermission(provisional: true);
-    final fcmToken = await FirebaseMessaging.instance.getToken();
+    final messaging = FirebaseMessaging.instance;
+    final settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+
+    debugPrint('User granted permission: ${settings.authorizationStatus}');
+    final fcmToken = await messaging.getToken();
     debugPrint(fcmToken);
   }
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   runApp(const MyApp());
 }

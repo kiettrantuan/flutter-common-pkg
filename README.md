@@ -19,6 +19,9 @@ Remember adding Firebase secret to `.gitignore`:
 **/GoogleService-Info.plist
 ```
 
+[Revoke then generate new keys](https://console.cloud.google.com/apis/credentials) in case
+accidentally commited above files.
+
 Steps to remove commited files after adding to `.gitignore`:
 
 ```shell
