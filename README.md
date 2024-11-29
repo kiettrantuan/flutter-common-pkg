@@ -7,6 +7,17 @@ Flutter common packages:
 - chopper
 - json_serializable
 - shared_preferences
+- flutter_launcher_icons
+- firebase_analytics
+- firebase_messaging
+
+Remember adding Firebase secret to .gitignore:
+
+```
+**/firebase_options.dart
+**/google-services.json
+**/GoogleService-Info.plist
+```
 
 ## Getting Started
 
